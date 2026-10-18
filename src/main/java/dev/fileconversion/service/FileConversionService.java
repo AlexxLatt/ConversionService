@@ -26,15 +26,9 @@ public class FileConversionService {
     private final List<FileConversionStrategy> typeConversion;
     private final MinioService minioService;
     private final OutboxRepository outBoxRepository;
-    private final OutboxService outboxService;
+    private final ConversionResultService conversionResultService;
 
     public void convert(FileConversionRequestEvent event) {
-
-
-        if (outBoxRepository.existsById(event.eventId())) {
-            log.info("Записть с  id:{}", event.eventId() + "уже существует");
-            return;
-        }
 
         String extension = FilenameUtils.getExtension(event.sourceFilePath());
 
@@ -64,7 +58,6 @@ public class FileConversionService {
             throw new RuntimeException("Ошибка конвертации файла", e);
         }
 
-        outboxService.saveResult(event, resultFilePath);
-
+        conversionResultService.saveConversionResult(event, resultFilePath);
     }
 }

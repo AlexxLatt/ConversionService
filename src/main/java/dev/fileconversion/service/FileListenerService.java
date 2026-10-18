@@ -14,7 +14,6 @@ public class FileListenerService {
 
     private final InboxRepository inBoxRepository;
     private final FileConversionService fileConversionService;
-    private final InboxService inboxService;
 
     public void listen(FileConversionRequestEvent event)  {
 
@@ -30,7 +29,7 @@ public class FileListenerService {
 
         log.info("4. Конвертация завершилась");
 
-        inboxService.saveResult(event);
+
     }
 
 
