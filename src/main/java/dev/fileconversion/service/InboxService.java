@@ -3,7 +3,7 @@ package dev.fileconversion.service;
 import dev.fileconversion.entity.Inbox;
 import dev.fileconversion.enums.InboxStatus;
 import dev.fileconversion.event.FileConversionRequestEvent;
-import dev.fileconversion.repository.InBoxRepository;
+import dev.fileconversion.repository.InboxRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class InboxService {
 
-    private final InBoxRepository inBoxRepository;
+    private final InboxRepository inBoxRepository;
 
     @Transactional
     public void saveResult(FileConversionRequestEvent event) {

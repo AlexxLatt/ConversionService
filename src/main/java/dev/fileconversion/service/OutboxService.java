@@ -4,7 +4,7 @@ package dev.fileconversion.service;
 import dev.fileconversion.entity.Outbox;
 import dev.fileconversion.event.FileConversionRequestEvent;
 import dev.fileconversion.event.FileConversionResultEvent;
-import dev.fileconversion.repository.OutBoxRepository;
+import dev.fileconversion.repository.OutboxRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +20,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class OutboxService {
 
-    private final OutBoxRepository outBoxRepository;
+    private final OutboxRepository outBoxRepository;
     private final ObjectMapper objectMapper;
 
 

@@ -2,7 +2,7 @@ package dev.fileconversion.service;
 
 
 import dev.fileconversion.event.FileConversionRequestEvent;
-import dev.fileconversion.repository.InBoxRepository;
+import dev.fileconversion.repository.InboxRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class FileListenerService {
 
-    private final InBoxRepository inBoxRepository;
+    private final InboxRepository inBoxRepository;
     private final FileConversionService fileConversionService;
     private final InboxService inboxService;
 

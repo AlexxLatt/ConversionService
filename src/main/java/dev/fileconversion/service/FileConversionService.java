@@ -2,11 +2,9 @@ package dev.fileconversion.service;
 
 
 import dev.fileconversion.converter.FileConversionStrategy;
-import dev.fileconversion.entity.Outbox;
 import dev.fileconversion.event.FileConversionRequestEvent;
 import dev.fileconversion.exception.BadRequestException;
-import dev.fileconversion.exception.NotFoundException;
-import dev.fileconversion.repository.OutBoxRepository;
+import dev.fileconversion.repository.OutboxRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FilenameUtils;
@@ -27,7 +25,7 @@ public class FileConversionService {
 
     private final List<FileConversionStrategy> typeConversion;
     private final MinioService minioService;
-    private final OutBoxRepository outBoxRepository;
+    private final OutboxRepository outBoxRepository;
     private final OutboxService outboxService;
 
     public void convert(FileConversionRequestEvent event) {

@@ -5,5 +5,5 @@ import dev.fileconversion.entity.Inbox;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
-public interface InBoxRepository extends JpaRepository<Inbox, Long> {
+public interface InboxRepository extends JpaRepository<Inbox, Long> {
 }

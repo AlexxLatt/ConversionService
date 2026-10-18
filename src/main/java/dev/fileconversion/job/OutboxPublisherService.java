@@ -2,7 +2,7 @@ package dev.fileconversion.job;
 
 
 import dev.fileconversion.entity.Outbox;
-import dev.fileconversion.repository.OutBoxRepository;
+import dev.fileconversion.repository.OutboxRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -18,7 +18,7 @@ import java.util.List;
 public class OutboxPublisherService {
 
 
-    private final OutBoxRepository outBoxRepository;
+    private final OutboxRepository outBoxRepository;
     private final KafkaTemplate<String, String> kafkaTemplate;
     private final String TOPIC_NAME = "file-conversion-result";
 
