@@ -8,6 +8,7 @@ import dev.fileconversion.exception.BadRequestException;
 import dev.fileconversion.exception.NotFoundException;
 import dev.fileconversion.repository.OutBoxRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,7 @@ import java.io.InputStream;
 
 import java.util.List;
 
-
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class FileConversionService {
@@ -33,11 +34,9 @@ public class FileConversionService {
 
 
         if (outBoxRepository.existsById(event.eventId())) {
-            Outbox outBox = outBoxRepository.findById(event.eventId())
-                    .orElseThrow(() -> new NotFoundException("Ошибка поиска по id: " + event.eventId()));
-
+            log.info("Записть с  id:{}", event.eventId() + "уже существует");
+            return;
         }
-
 
         String extension = FilenameUtils.getExtension(event.sourceFilePath());
 
