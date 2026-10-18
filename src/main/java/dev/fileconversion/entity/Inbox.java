@@ -1,6 +1,7 @@
 package dev.fileconversion.entity;
 
 
+import dev.fileconversion.enums.InboxStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,8 +15,8 @@ import java.time.Instant;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "in_box")
-public class InBox {
+@Table(name = "inbox")
+public class Inbox {
 
     @Id
     @Column(name = "event_id", nullable = false)
@@ -24,5 +25,9 @@ public class InBox {
 
     @Column(name = "received_at", nullable = false)
     private Instant receivedAt;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false)
+    private InboxStatus status;
 
 }

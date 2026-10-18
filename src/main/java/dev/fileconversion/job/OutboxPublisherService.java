@@ -1,7 +1,7 @@
-package dev.fileconversion.service;
+package dev.fileconversion.job;
 
 
-import dev.fileconversion.entity.OutBox;
+import dev.fileconversion.entity.Outbox;
 import dev.fileconversion.repository.OutBoxRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,22 +18,22 @@ import java.util.List;
 public class OutboxPublisherService {
 
 
-    private  final OutBoxRepository outBoxRepository;
-    private  final KafkaTemplate<String, String> kafkaTemplate;
+    private final OutBoxRepository outBoxRepository;
+    private final KafkaTemplate<String, String> kafkaTemplate;
     private final String TOPIC_NAME = "file-conversion-result";
 
     @Scheduled(fixedDelay = 5000)
     public void publish() {
         log.info("OutboxPublisher запущен");
-        List<OutBox> outBoxList = outBoxRepository.findTop100ByPublishedAtIsNullOrderByCreatedAtAsc();
+        List<Outbox> outBoxList = outBoxRepository.findTop100ByPublishedAtIsNullOrderByCreatedAtAsc();
 
-        for (OutBox event : outBoxList) {
+        for (Outbox event : outBoxList) {
             try {
                 kafkaTemplate.send(
                         TOPIC_NAME,
-                        event.getEventKey()==null? null: event.getEventKey().toString(),
+                        event.getEventKey() == null ? null : event.getEventKey().toString(),
                         event.getPayload()
-                        ).get();
+                ).get();
 
                 event.setPublishedAt(Instant.now());
 
@@ -41,7 +41,7 @@ public class OutboxPublisherService {
 
                 log.info("Событие отправлено в Kafka: {}", event.getEventId());
 
-            }catch (Exception e){
+            } catch (Exception e) {
                 log.error(
                         "Ошибка отправки события {}",
                         event.getEventId(),

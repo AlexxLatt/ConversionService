@@ -15,8 +15,8 @@ import java.time.Instant;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "out_box")
-public class OutBox {
+@Table(name = "outbox")
+public class Outbox {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
