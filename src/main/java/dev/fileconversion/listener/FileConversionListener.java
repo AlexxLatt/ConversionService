@@ -1,41 +1,31 @@
 package dev.fileconversion.listener;
 
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.fileconversion.event.FileConversionRequestEvent;
-import dev.fileconversion.repository.InBoxRepository;
-import dev.fileconversion.service.FileConversionService;
-import dev.fileconversion.service.InboxService;
+import dev.fileconversion.service.FileListenerService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
+
 
 @Slf4j
 @Component
 @RequiredArgsConstructor
 public class FileConversionListener {
 
-    private final InBoxRepository inBoxRepository;
-    private final FileConversionService fileConversionService;
-    private final InboxService inboxService;
+    private static final String TOPIC_NAME = "file-conversion-requests";
 
-    public void listen(FileConversionRequestEvent event)  {
+    private final FileListenerService fileConversionListener;
 
-        log.info("1. Получено событие: eventId={}", event.eventId());
 
-        if (inBoxRepository.existsById(event.eventId())) {
-            log.info("2. Событие уже обработано: eventId={}", event.eventId());
-            return;
-        }
+    @KafkaListener(
+            topics = TOPIC_NAME,
+            groupId = "file-conversion-group"
+    )
 
-        log.info("3. Начинаем конвертацию");
-        fileConversionService.convert(event);
-
-        log.info("4. Конвертация завершилась");
-
-        inboxService.saveResult(event);
+    public void consume(FileConversionRequestEvent event) {
+        log.info("Получено сообщение из Kafka, передаем в listener: {}", event.eventId());
+        fileConversionListener.listen(event);
     }
 
 
