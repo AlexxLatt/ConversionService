@@ -8,6 +8,8 @@ import dev.fileconversion.event.FileConversionRequestEvent;
 import dev.fileconversion.event.FileConversionResultEvent;
 import dev.fileconversion.repository.InboxRepository;
 import dev.fileconversion.repository.OutboxRepository;
+import jakarta.persistence.Table;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,8 @@ import java.util.UUID;
 @Slf4j
 @Service
 @RequiredArgsConstructor
+
+@Transactional
 public class ConversionResultService {
 
     private  final InboxRepository inboxRepository;
