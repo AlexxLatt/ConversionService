@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://postgres:5432/file_conversion
+
+  kafka:
+    bootstrap-servers: kafka:9092
+
+app:
+  storage:
+    endpoint: http://minio:9000
