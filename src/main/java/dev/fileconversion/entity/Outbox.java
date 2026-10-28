@@ -9,6 +9,7 @@ import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
 import java.time.Instant;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -26,7 +27,7 @@ public class Outbox {
     private String eventId;
 
     @Column(name = "event_key")
-    private Long eventKey;
+    private UUID eventKey;
 
 
     @JdbcTypeCode(SqlTypes.JSON)

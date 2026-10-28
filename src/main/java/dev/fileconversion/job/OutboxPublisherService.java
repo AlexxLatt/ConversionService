@@ -2,6 +2,7 @@ package dev.fileconversion.job;
 
 
 import dev.fileconversion.entity.Outbox;
+import dev.fileconversion.event.FileConversionResultEvent;
 import dev.fileconversion.repository.OutboxRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

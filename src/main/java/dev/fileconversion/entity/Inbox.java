@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.Instant;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -20,7 +21,7 @@ public class Inbox {
 
     @Id
     @Column(name = "event_id", nullable = false)
-    private Long eventId;
+    private UUID eventId;
 
 
     @Column(name = "received_at", nullable = false)

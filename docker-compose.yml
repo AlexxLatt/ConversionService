@@ -56,6 +56,9 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: file-conversion-app
+    networks:
+      - default
+      - microservices-network
     environment:
       SPRING_PROFILES_ACTIVE: docker
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/file_conversion
@@ -92,3 +95,8 @@ services:
 volumes:
   postgres_data:
   minio_data:
+
+networks:
+  microservices-network:
+    external: true
+    name: microservices-network
